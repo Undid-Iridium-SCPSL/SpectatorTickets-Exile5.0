@@ -5,7 +5,7 @@ using System;
 using Server = Exiled.Events.Handlers.Server;
 using Player = Exiled.Events.Handlers.Player;
 
-namespace TutorialPlugin_EXILED
+namespace SpectatorTickets_EXILED3
 {
 
 
@@ -48,13 +48,6 @@ namespace TutorialPlugin_EXILED
             currentSpectator = new Handlers.SpectatorInfo();
             currentServer = new Handlers.Server();
 
-            Server.WaitingForPlayers += currentServer.OnWaitingForPlayers;
-            Server.RoundStarted += currentServer.OnRoundStarted;
-
-            Player.Left += currentPlayer.OnLeave;
-            
-            Player.Joined += currentPlayer.OnJoin;
-            Player.InteractingDoor += currentPlayer.OnInteractingDoor;
             Player.Died += currentSpectator.OnDeath;
             Player.Spawning += currentSpectator.OnRespawn;
             Server.RestartingRound += currentSpectator.onRoundRestart;
@@ -67,12 +60,6 @@ namespace TutorialPlugin_EXILED
             // Make it dynamically updatable.
             // We do this by removing the listener for the event and then nulling the event handler.
             // This process must be repeated for each event.
-            Server.WaitingForPlayers -= currentServer.OnWaitingForPlayers;
-            Server.RoundStarted -= currentServer.OnRoundStarted;
-
-            Player.Left -= currentPlayer.OnLeave;
-            Player.Joined -= currentPlayer.OnJoin;
-            Player.InteractingDoor -= currentPlayer.OnInteractingDoor;
             Player.Died -= currentSpectator.OnDeath;
             Server.EndingRound -= currentSpectator.OnRoundEnd;
             Server.RestartingRound -= currentSpectator.onRoundRestart;
@@ -81,6 +68,7 @@ namespace TutorialPlugin_EXILED
 
             currentPlayer = null;
             currentServer = null;
+            currentSpectator = null;
         }
     }
 }

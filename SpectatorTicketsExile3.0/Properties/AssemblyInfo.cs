@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TutorialPlugin-EXILED")]
+[assembly: AssemblyTitle("SpectatorTickets_EXILE3")]
 [assembly: AssemblyDescription("A tutorial plugin")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Undid-Iridium")]
-[assembly: AssemblyProduct("TutorialPlugin-EXILED")]
+[assembly: AssemblyProduct("SpectatorTickets_EXILE3")]
 [assembly: AssemblyCopyright("Copyright © Undid-Iridium  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
