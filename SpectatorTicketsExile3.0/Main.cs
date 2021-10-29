@@ -68,6 +68,7 @@ namespace SpectatorTickets_EXILED3
             // We do this by removing the listener for the event and then nulling the event handler.
             // This process must be repeated for each event.
             Player.Died -= currentSpectator.OnDeath;
+            Player.Spawning -= currentSpectator.OnRespawn;
             Server.EndingRound -= currentSpectator.OnRoundEnd;
             Server.RestartingRound -= currentSpectator.onRoundRestart;
             Server.WaitingForPlayers -= currentSpectator.onRoundRestart;
