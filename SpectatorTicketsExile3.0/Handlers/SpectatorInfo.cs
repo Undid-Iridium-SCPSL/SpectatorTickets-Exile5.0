@@ -23,11 +23,12 @@ namespace SpectatorTickets_EXILED3.Handlers
             String message_to_use = new string('\n', 14) + $"<align=right><color=blue>NTF Tickets:</color> {Respawn.NtfTickets} </align>" +
                         $"\n<align=right><color=green>Chaos Tickets:</color> {Respawn.ChaosTickets} </align>";
             deathEvent.Target.ShowHint(message_to_use, 1);
-
-
         }
 
-
+        /// <summary>
+        /// When a player respawns, we need a way to wipe their hints if they have any. 
+        /// </summary>
+        /// <param name="respawnEvent"></param>
         internal void OnRespawn(SpawningEventArgs respawnEvent)
         {
             if (respawnEvent.Player.HasHint)
