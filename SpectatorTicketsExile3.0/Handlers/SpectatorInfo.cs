@@ -1,6 +1,7 @@
 ﻿using Exiled.API.Features;
 using Exiled.Events.EventArgs;
 using System;
+using Player = Exiled.API.Features.Player;
 
 
 namespace SpectatorTickets_EXILED3.Handlers
@@ -27,6 +28,8 @@ namespace SpectatorTickets_EXILED3.Handlers
 
         /// <summary>
         /// When a player respawns, we need a way to wipe their hints if they have any. 
+        /// We DO not care about updating on every respawn, I do not think we should. Why?
+        /// Because that's expensive, and minimal difference in experience. 
         /// </summary>
         /// <param name="respawnEvent"></param>
         internal void OnRespawn(SpawningEventArgs respawnEvent)
@@ -45,6 +48,34 @@ namespace SpectatorTickets_EXILED3.Handlers
         public void OnRoundRestart()
         {
             Map.ShowHint("", 0);
+        }
+
+        /// <summary>
+        /// All respawned players need hint removed (should be done by OnRespawn but secondary check)
+        /// All non-respawned who are dead need to have their values updated. 
+        /// </summary>
+        /// <param name="team_respawn"></param>
+        internal void OnTeamSpawn(RespawningTeamEventArgs team_respawn)
+        {
+            System.Collections.Generic.List<Player> current_respawning_players = team_respawn.Players;
+            foreach (Player current_respawned_player in current_respawning_players)
+            {
+                if (current_respawned_player.HasHint)
+                {
+                    current_respawned_player.ShowHint("", 0);
+                }
+            }
+
+            foreach (Player player in (Player.List))
+            {
+                if (!current_respawning_players.Contains(player) && player.IsDead)
+                {
+                    String message_to_use = new string('\n', 14) + $"<align=right><color=blue>NTF Tickets:</color> {Respawn.NtfTickets} </align>" +
+                       $"\n<align=right><color=green>Chaos Tickets:</color> {Respawn.ChaosTickets} </align>";
+                    player.ShowHint(message_to_use, 1);
+                }
+
+            }
         }
 
         /// <summary>

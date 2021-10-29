@@ -5,7 +5,7 @@ namespace SpectatorTickets_EXILED3.Handlers
     /// <summary>
     /// UNUSED, EXAMPLE ONLY
     /// </summary>
-    class Player
+    class player
     {
         ///
         public void OnLeave(LeftEventArgs leftEvent)

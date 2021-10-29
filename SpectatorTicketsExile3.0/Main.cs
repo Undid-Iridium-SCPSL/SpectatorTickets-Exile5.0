@@ -58,6 +58,7 @@ namespace SpectatorTickets_EXILED3
             Server.RestartingRound += currentSpectator.OnRoundRestart;
             Server.EndingRound += currentSpectator.OnRoundEnd;
             Server.WaitingForPlayers += currentSpectator.OnRoundRestart;
+            Server.RespawningTeam += currentSpectator.OnTeamSpawn;
         }
         /// <summary>
         /// Unregisters the events defined in RegisterEvents, recommended that everything created be destroyed if not reused in some way.
@@ -72,6 +73,7 @@ namespace SpectatorTickets_EXILED3
             Server.EndingRound -= currentSpectator.OnRoundEnd;
             Server.RestartingRound -= currentSpectator.OnRoundRestart;
             Server.WaitingForPlayers -= currentSpectator.OnRoundRestart;
+            Server.RespawningTeam -= currentSpectator.OnTeamSpawn;
 
 
             currentSpectator = null;

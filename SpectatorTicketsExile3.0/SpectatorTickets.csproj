@@ -104,7 +104,7 @@
   <ItemGroup>
     <Compile Include="Commands\Example.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="Handlers\Player.cs" />
+    <Compile Include="Handlers\player.cs" />
     <Compile Include="Handlers\Server.cs" />
     <Compile Include="Handlers\SpectatorInfo.cs" />
     <Compile Include="Main.cs" />
