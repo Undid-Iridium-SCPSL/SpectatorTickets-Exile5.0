@@ -20,7 +20,6 @@ namespace SpectatorTickets_EXILED3.Handlers
         public void OnDeath(DiedEventArgs deathEvent)
         {
             //Automatically assume when death is called, if person died that they need to be shown hint.
-
             String message_to_use = new string('\n', 14) + $"<align=right><color=blue>NTF Tickets:</color> {Respawn.NtfTickets} </align>" +
                         $"\n<align=right><color=green>Chaos Tickets:</color> {Respawn.ChaosTickets} </align>";
             deathEvent.Target.ShowHint(message_to_use, 1);
@@ -31,7 +30,6 @@ namespace SpectatorTickets_EXILED3.Handlers
 
         internal void OnRespawn(SpawningEventArgs respawnEvent)
         {
-            respawnEvent.Player.Broadcast(1, "Welcome back to the living", Broadcast.BroadcastFlags.Normal, true);
             if (respawnEvent.Player.HasHint)
             {
                 respawnEvent.Player.ShowHint("", 0);
@@ -43,7 +41,7 @@ namespace SpectatorTickets_EXILED3.Handlers
         /// <summary>
         /// Function purpose is to stop showing hint when round ends, respawn, etc. 
         /// </summary>
-        public void onRoundRestart()
+        public void OnRoundRestart()
         {
             Map.ShowHint("", 0);
         }

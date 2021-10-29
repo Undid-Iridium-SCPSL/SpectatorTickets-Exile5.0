@@ -55,9 +55,9 @@ namespace SpectatorTickets_EXILED3
 
             Player.Died += currentSpectator.OnDeath;
             Player.Spawning += currentSpectator.OnRespawn;
-            Server.RestartingRound += currentSpectator.onRoundRestart;
+            Server.RestartingRound += currentSpectator.OnRoundRestart;
             Server.EndingRound += currentSpectator.OnRoundEnd;
-            Server.WaitingForPlayers += currentSpectator.onRoundRestart;
+            Server.WaitingForPlayers += currentSpectator.OnRoundRestart;
         }
         /// <summary>
         /// Unregisters the events defined in RegisterEvents, recommended that everything created be destroyed if not reused in some way.
@@ -70,8 +70,8 @@ namespace SpectatorTickets_EXILED3
             Player.Died -= currentSpectator.OnDeath;
             Player.Spawning -= currentSpectator.OnRespawn;
             Server.EndingRound -= currentSpectator.OnRoundEnd;
-            Server.RestartingRound -= currentSpectator.onRoundRestart;
-            Server.WaitingForPlayers -= currentSpectator.onRoundRestart;
+            Server.RestartingRound -= currentSpectator.OnRoundRestart;
+            Server.WaitingForPlayers -= currentSpectator.OnRoundRestart;
 
 
             currentSpectator = null;
