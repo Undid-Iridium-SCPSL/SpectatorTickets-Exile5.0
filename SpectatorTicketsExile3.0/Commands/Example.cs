@@ -1,9 +1,5 @@
 ﻿using CommandSystem;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpectatorTickets_EXILED3.Commands
 {
@@ -18,7 +14,7 @@ namespace SpectatorTickets_EXILED3.Commands
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
-            if(sender is Console)
+            if (sender is Console)
             {
                 response = "Updated plugin to do something if console";
                 return true;
