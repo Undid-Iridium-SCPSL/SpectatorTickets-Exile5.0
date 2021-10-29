@@ -5,7 +5,7 @@ using Exiled.API.Features;
 using Exiled.API.Interfaces;
 
 using UnityEngine;
-namespace TutorialPlugin_EXILED
+namespace SpectatorTickets_EXILED3
 {
     public sealed class Config : IConfig
     {
@@ -26,12 +26,6 @@ namespace TutorialPlugin_EXILED
         [Description("Sets the message when a booby trapped door is touched")]
         public string DoorTrapMessage { get; set; } = "My trap door is activated My trap has been activated!!";
 
-
-        ///// <summary>
-        ///// Gets the joined broadcast.
-        ///// </summary>
-        //[Description("This is an example on how to use the Broadcast class, to send a broadcast to joined players")]
-        //public Broadcast JoinedBroadcast { get; private set; } = new Broadcast("Welcome to the server!", 15);
 
     }
 }
