@@ -1,10 +1,4 @@
 ﻿using Exiled.API.Features;
-using Exiled.Events.EventArgs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace SpectatorTickets_EXILED3.Handlers
@@ -19,9 +13,9 @@ namespace SpectatorTickets_EXILED3.Handlers
 
         public void OnRoundStarted()
         {
-            Map.Broadcast(6, TutorialPlugin.Instance.Config.RoundStartMessage);
+            Map.Broadcast(6, SpectatorTickets.Instance.Config.RoundStartMessage);
         }
 
-       
+
     }
 }

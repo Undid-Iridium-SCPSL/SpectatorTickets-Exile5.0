@@ -1,10 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Exiled.API.Interfaces;
 using System.ComponentModel;
-
-using Exiled.API.Features;
-using Exiled.API.Interfaces;
-
-using UnityEngine;
 namespace SpectatorTickets_EXILED3
 {
     public sealed class Config : IConfig

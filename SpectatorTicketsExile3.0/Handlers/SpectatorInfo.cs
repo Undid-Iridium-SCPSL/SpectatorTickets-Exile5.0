@@ -1,17 +1,12 @@
 ﻿using Exiled.API.Features;
-using Exiled.Events;
 using Exiled.Events.EventArgs;
-using Hints;
 using System;
-using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
-using UnityEngine;
 
 
-namespace SpectatorTickets_EXILED3.Handlers 
+namespace SpectatorTickets_EXILED3.Handlers
 {
-    class SpectatorInfo 
+    class SpectatorInfo
     {
 
         bool stop_showing_tickets = false;

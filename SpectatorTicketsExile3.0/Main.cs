@@ -1,32 +1,25 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
 using System;
-
-using Server = Exiled.Events.Handlers.Server;
 using Player = Exiled.Events.Handlers.Player;
+using Server = Exiled.Events.Handlers.Server;
 
 namespace SpectatorTickets_EXILED3
 {
 
 
 
-    //warning MSB3270:
-    public class TutorialPlugin : Plugin<Config>
+    public class SpectatorTickets : Plugin<Config>
     {
-        private static readonly Lazy<TutorialPlugin> LazyInstance = new Lazy<TutorialPlugin>(() => new TutorialPlugin());
+        private static readonly Lazy<SpectatorTickets> LazyInstance = new Lazy<SpectatorTickets>(() => new SpectatorTickets());
 
-        public static TutorialPlugin Instance => LazyInstance.Value;
+        public static SpectatorTickets Instance => LazyInstance.Value;
 
         public override PluginPriority Priority { get; } = PluginPriority.Medium;
 
-        private Handlers.Player currentPlayer;
         private Handlers.SpectatorInfo currentSpectator;
-        private Handlers.Server currentServer;
 
-        private TutorialPlugin()
-        {
 
-        }
 
         public override void OnEnabled()
         {
@@ -44,9 +37,7 @@ namespace SpectatorTickets_EXILED3
             // to the EXILED_Events event listener so we get the event.
 
 
-            currentPlayer = new Handlers.Player();
             currentSpectator = new Handlers.SpectatorInfo();
-            currentServer = new Handlers.Server();
 
             Player.Died += currentSpectator.OnDeath;
             Player.Spawning += currentSpectator.OnRespawn;
@@ -66,8 +57,6 @@ namespace SpectatorTickets_EXILED3
             Server.WaitingForPlayers -= currentSpectator.onRoundRestart;
 
 
-            currentPlayer = null;
-            currentServer = null;
             currentSpectator = null;
         }
     }
