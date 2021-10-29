@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpectatorTickets_EXILED3.Handlers
 {
+
     class SpectatorInfo
     {
 

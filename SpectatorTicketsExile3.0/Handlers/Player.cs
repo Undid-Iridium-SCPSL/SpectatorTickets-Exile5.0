@@ -2,6 +2,7 @@
 using Exiled.Events.EventArgs;
 namespace SpectatorTickets_EXILED3.Handlers
 {
+    //NOT USED - EXAMPLE ONLY. 
     class Player
     {
         public void OnLeave(LeftEventArgs leftEvent)

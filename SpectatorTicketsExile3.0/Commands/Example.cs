@@ -3,6 +3,7 @@ using System;
 
 namespace SpectatorTickets_EXILED3.Commands
 {
+    //UNUSED, EXAMPLE ONLY - Also rename file to Allow for the correct naming scheme. 
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     class Allow : ICommand
     {
