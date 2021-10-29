@@ -3,7 +3,9 @@
 
 namespace SpectatorTickets_EXILED3.Handlers
 {
-    //UNUSED, EXAMPLE ONLY
+    /// <summary>
+    /// UNUSED, EXAMPLE ONLY
+    /// </summary>
     class Server
     {
         public void OnWaitingForPlayers()

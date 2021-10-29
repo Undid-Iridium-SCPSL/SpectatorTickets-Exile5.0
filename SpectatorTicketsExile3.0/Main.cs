@@ -13,24 +13,38 @@ namespace SpectatorTickets_EXILED3
     {
         private static readonly Lazy<SpectatorTickets> LazyInstance = new Lazy<SpectatorTickets>(() => new SpectatorTickets());
 
+        /// <summary>
+        /// Quiet add SpectatorTickets to reduce performance hit
+        /// </summary>
         public static SpectatorTickets Instance => LazyInstance.Value;
 
+        /// <summary>
+        /// Medium priority, lower prioritys mean faster loadin
+        /// </summary>
         public override PluginPriority Priority { get; } = PluginPriority.Medium;
+
 
         private Handlers.SpectatorInfo currentSpectator;
 
 
-
+        /// <summary>
+        /// Entrance function called through Exile
+        /// </summary>
         public override void OnEnabled()
         {
             RegisterEvents();
         }
-
+        /// <summary>
+        /// Destruction function called through Exile
+        /// </summary>
         public override void OnDisabled()
         {
             UnRegisterEvents();
         }
 
+        /// <summary>
+        /// Registers events for EXILE to hook unto with cororotines (I think?)
+        /// </summary>
         public void RegisterEvents()
         {
             // Register the event handler class. And add the event,
@@ -45,7 +59,9 @@ namespace SpectatorTickets_EXILED3
             Server.EndingRound += currentSpectator.OnRoundEnd;
             Server.WaitingForPlayers += currentSpectator.onRoundRestart;
         }
-
+        /// <summary>
+        /// Unregisters the events defined in RegisterEvents, recommended that everything created be destroyed if not reused in some way.
+        /// </summary>
         public void UnRegisterEvents()
         {
             // Make it dynamically updatable.
