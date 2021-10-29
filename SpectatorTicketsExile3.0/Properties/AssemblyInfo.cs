@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SpectatorTickets_EXILE3")]
-[assembly: AssemblyDescription("A tutorial plugin")]
+[assembly: AssemblyDescription("Spectator tickets plugin")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Undid-Iridium")]
 [assembly: AssemblyProduct("SpectatorTickets_EXILE3")]

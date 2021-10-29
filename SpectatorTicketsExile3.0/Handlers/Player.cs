@@ -2,8 +2,12 @@
 using Exiled.Events.EventArgs;
 namespace SpectatorTickets_EXILED3.Handlers
 {
+    /// <summary>
+    /// UNUSED, EXAMPLE ONLY
+    /// </summary>
     class Player
     {
+        ///
         public void OnLeave(LeftEventArgs leftEvent)
         {
             string leaveMessage = SpectatorTickets.Instance.Config.LeaveMessage.Replace("{Player}", leftEvent.Player.Nickname);
