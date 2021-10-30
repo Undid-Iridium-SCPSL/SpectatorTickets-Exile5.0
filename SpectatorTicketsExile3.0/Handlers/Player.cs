@@ -1,6 +1,6 @@
 ﻿using Exiled.API.Features;
 using Exiled.Events.EventArgs;
-namespace SpectatorTickets_EXILED3.Handlers
+namespace SpectatorTickets3.Handlers
 {
     /// <summary>
     /// UNUSED, EXAMPLE ONLY

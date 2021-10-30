@@ -1,11 +1,13 @@
 ﻿using Exiled.API.Interfaces;
 using System.ComponentModel;
-namespace SpectatorTickets_EXILED3
+namespace SpectatorTickets3
 {
     public sealed class Config : IConfig
     {
         //public bool IsEnabled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool IsEnabled { get; set; } = true;
+
+        public bool ForceConstantUpdates { get; set; } = false;
 
 
         [Description("Sets the message when someone joins the server. {Player} will be replaced with player name.")]

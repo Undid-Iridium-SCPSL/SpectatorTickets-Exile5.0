@@ -1,7 +1,7 @@
 ﻿using CommandSystem;
 using System;
 
-namespace SpectatorTickets_EXILED3.Commands
+namespace SpectatorTickets3.Commands
 {
     //
     /// <summary>
