@@ -17,7 +17,10 @@ namespace SpectatorTickets3.Handlers
         }
 #pragma warning restore IDE0051 // Allow unused private members to not be ignored
 
-        // Update both CountsPerSecond values every second.
+        /// <summary>
+        /// Updates Ticket count every ~second so that information can be readily available to players. 
+        /// </summary>
+        /// <returns></returns>
         IEnumerator TicketCoroutine()
         {
 
