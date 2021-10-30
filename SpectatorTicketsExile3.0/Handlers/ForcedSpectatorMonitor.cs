@@ -87,51 +87,57 @@ namespace SpectatorTickets3.Handlers
         //    Timing.KillCoroutines(_coroutineHandle);
         //    Destroy(this);
         //}
-        private float updateCount = 0;
-        private float fixedUpdateCount = 0;
-        private float updateUpdateCountPerSecond;
-        private float updateFixedUpdateCountPerSecond;
 
-
+        private Player current_player;
 
         void Awake()
         {
             // Uncommenting this will cause framerate to drop to 10 frames per second.
             // This will mean that FixedUpdate is called more often than Update.
             //Application.targetFrameRate = 10;
+
+            Log.Info("We have awoken");
+            current_player = Player.Get(gameObject);
             StartCoroutine(Loop());
         }
 
         // Increase the number of calls to Update.
-        void Update()
-        {
-            updateCount += 1;
-        }
+        //void Update()
+        //{
+        //    updateCount += 1;
+        //}
 
 
-        void FixedUpdate()
-        {
-            Log.Info("Fixed update: " + fixedUpdateCount);
-            Console.WriteLine(fixedUpdateCount);
-            fixedUpdateCount += 1;
-        }
+        //void FixedUpdate()
+        //{
+        //    Log.Info("Fixed update: " + fixedUpdateCount);
+        //    Console.WriteLine(fixedUpdateCount);
+        //    fixedUpdateCount += 1;
+        //}
 
 
 
         // Update both CountsPerSecond values every second.
         IEnumerator Loop()
         {
+
             while (true)
             {
-                Log.Info(fixedUpdateCount);
-                Console.WriteLine(fixedUpdateCount);
-                yield return new WaitForSeconds(1);
+                //Log.Info("What is the current player doing: " + current_player.ToString());
+                //Log.Info("What is the current role: " + current_player.Role + " versus : " + RoleType.Spectator);
 
-                updateUpdateCountPerSecond = updateCount;
-                updateFixedUpdateCountPerSecond = fixedUpdateCount;
 
-                updateCount = 0;
-                fixedUpdateCount = 0;
+                yield return new WaitForSeconds(.8F);
+
+                String message_to_use = new string('\n', 14) + $"<align=right><color=blue>NTF Tickets:</color> {Respawn.NtfTickets} </align>" +
+                      $"\n<align=right><color=green>Chaos Tickets:</color> {Respawn.ChaosTickets} </align>";
+                current_player.ShowHint(message_to_use, 1.5F);
+
+                if ((current_player == null || current_player.Role != RoleType.Spectator) && current_player.IsAlive)
+                {
+                    current_player.ShowHint("", 1);
+                    break;
+                }
             }
         }
 

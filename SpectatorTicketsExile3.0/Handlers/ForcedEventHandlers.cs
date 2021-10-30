@@ -12,6 +12,10 @@ namespace SpectatorTickets3.Handlers
             {
                 changeRoleEvent.Player.GameObject.AddComponent<ForcedSpectatorMonitor>();
             }
+            else if (Round.IsStarted)
+            {
+                changeRoleEvent.Player.ShowHint("", 1);
+            }
 
         }
     }
