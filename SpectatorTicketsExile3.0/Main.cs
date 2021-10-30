@@ -89,6 +89,7 @@ namespace SpectatorTickets3
             // This process must be repeated for each event.
             if (Config.ForceConstantUpdates)
             {
+                eventHandler = null;
                 PlayerEvents.ChangingRole -= eventHandler.OnRoleChange;
             }
             else
@@ -96,6 +97,7 @@ namespace SpectatorTickets3
                 PlayerEvents.Died -= currentSpectator.OnDeath;
                 PlayerEvents.Spawning -= currentSpectator.OnRespawn;
                 PlayerEvents.ChangingRole -= currentSpectator.OnChanginRole;
+
                 ServerEvents.EndingRound -= currentSpectator.OnRoundEnd;
                 ServerEvents.RestartingRound -= currentSpectator.OnRoundRestart;
                 ServerEvents.WaitingForPlayers -= currentSpectator.OnRoundRestart;
