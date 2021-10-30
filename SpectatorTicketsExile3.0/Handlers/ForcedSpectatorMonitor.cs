@@ -10,6 +10,9 @@ namespace SpectatorTickets3.Handlers
 
         private Player current_player;
 #pragma warning disable IDE0051 // Remove unused private members to be ignored
+        /// <summary>
+        /// Awake function hooked into by Unity, allows game object to know when to run this script
+        /// </summary>
         private void Awake()
         {
             current_player = Player.Get(gameObject);
