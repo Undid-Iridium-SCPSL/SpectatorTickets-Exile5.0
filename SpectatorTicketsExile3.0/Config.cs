@@ -7,6 +7,8 @@ namespace SpectatorTickets3
         //public bool IsEnabled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool IsEnabled { get; set; } = true;
 
+        public bool ForceConstantUpdates { get; set; } = false;
+
 
         [Description("Sets the message when someone joins the server. {Player} will be replaced with player name.")]
         public string JoinMessage { get; set; } = "{Player} - Why would you join?";

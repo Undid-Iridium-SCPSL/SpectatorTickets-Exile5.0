@@ -1,13 +1,12 @@
-﻿using Exiled.API.Features;
-using Exiled.Events.EventArgs;
-using System;
-using Player = Exiled.API.Features.Player;
-
-
+﻿
 namespace SpectatorTickets3.Handlers
 {
-
-    class SpectatorInfo
+    using Exiled.API.Features;
+    using Exiled.Events.EventArgs;
+    using System;
+    using System.Threading.Tasks;
+    using Player = Exiled.API.Features.Player;
+    class SpectatorInfo : Plugin<Config>, MonoBehaviour
     {
 
         /// <summary>
@@ -86,9 +85,35 @@ namespace SpectatorTickets3.Handlers
                 {
                     String message_to_use = new string('\n', 14) + $"<align=right><color=blue>NTF Tickets:</color> {Respawn.NtfTickets} </align>" +
                        $"\n<align=right><color=green>Chaos Tickets:</color> {Respawn.ChaosTickets} </align>";
-                    player.ShowHint(message_to_use, 1);
+                    player.ShowHint(message_to_use, 10000);
                 }
 
+            }
+        }
+
+
+
+        /// <summary>
+        /// Constant checking of player status and updating tickets appropriately. 
+        /// </summary>
+        /// <returns></returns>
+        public System.Collections.Generic.IEnumerable<Task> HintDisplay()
+        {
+            Log.Info("Yes.. force update but!: " + Config.ForceConstantUpdates);
+            while (Config.ForceConstantUpdates)
+            {
+                Log.Info("Constantly forcing this to run.. right?");
+                foreach (Player player in (Player.List))
+                {
+                    if (player.IsDead && player.Role is RoleType.Spectator)
+                    {
+                        String message_to_use = new string('\n', 14) + $"<align=right><color=blue>NTF Tickets:</color> {Respawn.NtfTickets} </align>" +
+                           $"\n<align=right><color=green>Chaos Tickets:</color> {Respawn.ChaosTickets} </align>";
+                        player.ShowHint(message_to_use, 1);
+                    }
+
+                }
+                yield return Task.Delay(800);
             }
         }
 

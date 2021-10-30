@@ -1,8 +1,7 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
 using System;
-using Player = Exiled.Events.Handlers.Player;
-using Server = Exiled.Events.Handlers.Server;
+
 
 namespace SpectatorTickets3
 {
@@ -42,6 +41,10 @@ namespace SpectatorTickets3
             UnRegisterEvents();
         }
 
+
+
+
+
         /// <summary>
         /// Registers events for EXILE to hook unto with cororotines (I think?)
         /// </summary>
@@ -53,15 +56,14 @@ namespace SpectatorTickets3
 
             currentSpectator = new Handlers.SpectatorInfo();
 
-            Player.Died += currentSpectator.OnDeath;
-            Player.Spawning += currentSpectator.OnRespawn;
-            Player.ChangingRole += currentSpectator.OnChanginRole;
+            //Player.Died += currentSpectator.OnDeath;
+            //Player.Spawning += currentSpectator.OnRespawn;
+            //Player.ChangingRole += currentSpectator.OnChanginRole;
 
-            Server.EndingRound += currentSpectator.OnRoundEnd;
-            Server.RestartingRound += currentSpectator.OnRoundRestart;
-            Server.WaitingForPlayers += currentSpectator.OnRoundRestart;
-            Server.RespawningTeam += currentSpectator.OnTeamSpawn;
-
+            //Server.EndingRound += currentSpectator.OnRoundEnd;
+            //Server.RestartingRound += currentSpectator.OnRoundRestart;
+            //Server.WaitingForPlayers += currentSpectator.OnRoundRestart;
+            //Server.RespawningTeam += currentSpectator.OnTeamSpawn;
 
 
             Log.Info("SpectratorTickets3 has been reloaded");
@@ -75,13 +77,13 @@ namespace SpectatorTickets3
             // Make it dynamically updatable.
             // We do this by removing the listener for the event and then nulling the event handler.
             // This process must be repeated for each event.
-            Player.Died -= currentSpectator.OnDeath;
-            Player.Spawning -= currentSpectator.OnRespawn;
-            Player.ChangingRole -= currentSpectator.OnChanginRole;
-            Server.EndingRound -= currentSpectator.OnRoundEnd;
-            Server.RestartingRound -= currentSpectator.OnRoundRestart;
-            Server.WaitingForPlayers -= currentSpectator.OnRoundRestart;
-            Server.RespawningTeam -= currentSpectator.OnTeamSpawn;
+            //Player.Died -= currentSpectator.OnDeath;
+            //Player.Spawning -= currentSpectator.OnRespawn;
+            //Player.ChangingRole -= currentSpectator.OnChanginRole;
+            //Server.EndingRound -= currentSpectator.OnRoundEnd;
+            //Server.RestartingRound -= currentSpectator.OnRoundRestart;
+            //Server.WaitingForPlayers -= currentSpectator.OnRoundRestart;
+            //Server.RespawningTeam -= currentSpectator.OnTeamSpawn;
 
             currentSpectator = null;
         }
