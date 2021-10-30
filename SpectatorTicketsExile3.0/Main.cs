@@ -55,15 +55,14 @@ namespace SpectatorTickets3
 
             Player.Died += currentSpectator.OnDeath;
             Player.Spawning += currentSpectator.OnRespawn;
+            Player.ChangingRole += currentSpectator.OnChanginRole;
+
             Server.EndingRound += currentSpectator.OnRoundEnd;
             Server.RestartingRound += currentSpectator.OnRoundRestart;
             Server.WaitingForPlayers += currentSpectator.OnRoundRestart;
             Server.RespawningTeam += currentSpectator.OnTeamSpawn;
 
 
-            Player.ChangingRole += currentSpectator.OnChanginRole;
-
-            //Player.ChangingGroup += currentSpectator.OnChangingGroup;
 
             Log.Info("SpectratorTickets3 has been reloaded");
 
@@ -78,14 +77,11 @@ namespace SpectatorTickets3
             // This process must be repeated for each event.
             Player.Died -= currentSpectator.OnDeath;
             Player.Spawning -= currentSpectator.OnRespawn;
+            Player.ChangingRole -= currentSpectator.OnChanginRole;
             Server.EndingRound -= currentSpectator.OnRoundEnd;
             Server.RestartingRound -= currentSpectator.OnRoundRestart;
             Server.WaitingForPlayers -= currentSpectator.OnRoundRestart;
             Server.RespawningTeam -= currentSpectator.OnTeamSpawn;
-
-            Player.ChangingRole -= currentSpectator.OnChanginRole;
-            //Player.ChangingGroup -= currentSpectator.OnChangingGroup;
-
 
             currentSpectator = null;
         }

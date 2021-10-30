@@ -41,19 +41,6 @@ namespace SpectatorTickets3.Handlers
 
         }
 
-        //internal void OnChangingGroup(ChangingGroupEventArgs changedGroupEvent)
-        //{
-        //    Log.Info("Changed group : " + changedGroupEvent.Player.ToString() + " group to change to: " + changedGroupEvent.NewGroup);
-
-        //    if (changedGroupEvent.Player.IsDead && !(changedGroupEvent.NewGroup.Equals("UserGroup")))
-        //    {
-        //        String message_to_use = new string('\n', 14) + $"<align=right><color=blue>NTF Tickets:</color> {Respawn.NtfTickets} </align>" +
-        //                $"\n<align=right><color=green>Chaos Tickets:</color> {Respawn.ChaosTickets} </align>";
-        //        changedGroupEvent.Player.ShowHint(message_to_use, 10000);
-        //    }
-        //}
-
-
         /// <summary>
         /// Class change to spectator should allow you to see NTF/Chaos tickets. 
         /// </summary>
