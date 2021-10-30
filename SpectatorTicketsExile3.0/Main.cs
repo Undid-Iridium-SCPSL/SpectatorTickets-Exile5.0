@@ -1,7 +1,8 @@
 ﻿using Exiled.API.Enums;
 using Exiled.API.Features;
 using System;
-
+using PlayerEvents = Exiled.Events.Handlers.Player;
+using ServerEvents = Exiled.Events.Handlers.Server;
 
 namespace SpectatorTickets3
 {
@@ -23,7 +24,8 @@ namespace SpectatorTickets3
         public override PluginPriority Priority { get; } = PluginPriority.Medium;
 
 
-        private Handlers.SpectatorInfo currentSpectator;
+        private Handlers.SpectatorMonitor currentSpectator;
+        private Handlers.ForcedEventHandlers eventHandler;
 
 
         /// <summary>
@@ -54,16 +56,24 @@ namespace SpectatorTickets3
             // to the EXILED_Events event listener so we get the event.
 
 
-            currentSpectator = new Handlers.SpectatorInfo();
+            currentSpectator = new Handlers.SpectatorMonitor();
 
-            //Player.Died += currentSpectator.OnDeath;
-            //Player.Spawning += currentSpectator.OnRespawn;
-            //Player.ChangingRole += currentSpectator.OnChanginRole;
+            if (Config.ForceConstantUpdates)
+            {
+                eventHandler = new Handlers.ForcedEventHandlers();
+                PlayerEvents.ChangingRole += eventHandler.OnRoleChange;
+            }
+            else
+            {
+                PlayerEvents.Died += currentSpectator.OnDeath;
+                PlayerEvents.Spawning += currentSpectator.OnRespawn;
+                PlayerEvents.ChangingRole += currentSpectator.OnChanginRole;
 
-            //Server.EndingRound += currentSpectator.OnRoundEnd;
-            //Server.RestartingRound += currentSpectator.OnRoundRestart;
-            //Server.WaitingForPlayers += currentSpectator.OnRoundRestart;
-            //Server.RespawningTeam += currentSpectator.OnTeamSpawn;
+                ServerEvents.EndingRound += currentSpectator.OnRoundEnd;
+                ServerEvents.RestartingRound += currentSpectator.OnRoundRestart;
+                ServerEvents.WaitingForPlayers += currentSpectator.OnRoundRestart;
+                ServerEvents.RespawningTeam += currentSpectator.OnTeamSpawn;
+            }
 
 
             Log.Info("SpectratorTickets3 has been reloaded");
@@ -77,13 +87,13 @@ namespace SpectatorTickets3
             // Make it dynamically updatable.
             // We do this by removing the listener for the event and then nulling the event handler.
             // This process must be repeated for each event.
-            //Player.Died -= currentSpectator.OnDeath;
-            //Player.Spawning -= currentSpectator.OnRespawn;
-            //Player.ChangingRole -= currentSpectator.OnChanginRole;
-            //Server.EndingRound -= currentSpectator.OnRoundEnd;
-            //Server.RestartingRound -= currentSpectator.OnRoundRestart;
-            //Server.WaitingForPlayers -= currentSpectator.OnRoundRestart;
-            //Server.RespawningTeam -= currentSpectator.OnTeamSpawn;
+            PlayerEvents.Died -= currentSpectator.OnDeath;
+            PlayerEvents.Spawning -= currentSpectator.OnRespawn;
+            PlayerEvents.ChangingRole -= currentSpectator.OnChanginRole;
+            ServerEvents.EndingRound -= currentSpectator.OnRoundEnd;
+            ServerEvents.RestartingRound -= currentSpectator.OnRoundRestart;
+            ServerEvents.WaitingForPlayers -= currentSpectator.OnRoundRestart;
+            ServerEvents.RespawningTeam -= currentSpectator.OnTeamSpawn;
 
             currentSpectator = null;
         }

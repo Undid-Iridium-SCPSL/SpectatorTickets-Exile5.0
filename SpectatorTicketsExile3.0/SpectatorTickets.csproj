@@ -97,6 +97,9 @@
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
     <Reference Include="YamlDotNet">
       <HintPath>..\..\..\..\AppData\Roaming\EXILED\Plugins\dependencies\YamlDotNet.dll</HintPath>
     </Reference>
@@ -104,9 +107,11 @@
   <ItemGroup>
     <Compile Include="Commands\Example.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Handlers\ForcedEventHandlers.cs" />
+    <Compile Include="Handlers\ForcedSpectatorMonitor.cs" />
     <Compile Include="Handlers\player.cs" />
     <Compile Include="Handlers\Server.cs" />
-    <Compile Include="Handlers\SpectatorInfo.cs" />
+    <Compile Include="Handlers\SpectatorMonitor.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
