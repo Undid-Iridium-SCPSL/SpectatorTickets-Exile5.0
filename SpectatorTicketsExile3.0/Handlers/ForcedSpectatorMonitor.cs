@@ -15,7 +15,7 @@ namespace SpectatorTickets3.Handlers
             current_player = Player.Get(gameObject);
             StartCoroutine(TicketCoroutine());
         }
-#pragma warning restore IDE0051 // Allow unused private members to be not ignored
+#pragma warning restore IDE0051 // Allow unused private members to not be ignored
 
         // Update both CountsPerSecond values every second.
         IEnumerator TicketCoroutine()
