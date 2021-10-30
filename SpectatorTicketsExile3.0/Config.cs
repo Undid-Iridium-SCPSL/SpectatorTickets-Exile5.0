@@ -1,6 +1,6 @@
 ﻿using Exiled.API.Interfaces;
 using System.ComponentModel;
-namespace SpectatorTickets_EXILED3
+namespace SpectatorTickets3
 {
     public sealed class Config : IConfig
     {

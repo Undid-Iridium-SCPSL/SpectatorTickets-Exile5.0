@@ -1,7 +1,7 @@
 ﻿using Exiled.API.Features;
 
 
-namespace SpectatorTickets_EXILED3.Handlers
+namespace SpectatorTickets3.Handlers
 {
     /// <summary>
     /// UNUSED, EXAMPLE ONLY
@@ -10,8 +10,8 @@ namespace SpectatorTickets_EXILED3.Handlers
     {
         public void OnWaitingForPlayers()
         {
-            Log.Info("Waiting for players.");
-            DebugLog.Log("Waiting for players???.");
+            Log.Info("Waiting for players to add to game.");
+            DebugLog.Log("Waiting for players to join???.");
         }
 
         public void OnRoundStarted()

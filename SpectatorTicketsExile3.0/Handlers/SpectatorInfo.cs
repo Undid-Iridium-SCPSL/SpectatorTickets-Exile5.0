@@ -4,7 +4,7 @@ using System;
 using Player = Exiled.API.Features.Player;
 
 
-namespace SpectatorTickets_EXILED3.Handlers
+namespace SpectatorTickets3.Handlers
 {
 
     class SpectatorInfo
@@ -23,7 +23,7 @@ namespace SpectatorTickets_EXILED3.Handlers
             //Automatically assume when death is called, if person died that they need to be shown hint.
             String message_to_use = new string('\n', 14) + $"<align=right><color=blue>NTF Tickets:</color> {Respawn.NtfTickets} </align>" +
                         $"\n<align=right><color=green>Chaos Tickets:</color> {Respawn.ChaosTickets} </align>";
-            deathEvent.Target.ShowHint(message_to_use, 1);
+            deathEvent.Target.ShowHint(message_to_use, 10000);
         }
 
         /// <summary>
@@ -39,6 +39,33 @@ namespace SpectatorTickets_EXILED3.Handlers
                 respawnEvent.Player.ShowHint("", 0);
             }
 
+        }
+
+        //internal void OnChangingGroup(ChangingGroupEventArgs changedGroupEvent)
+        //{
+        //    Log.Info("Changed group : " + changedGroupEvent.Player.ToString() + " group to change to: " + changedGroupEvent.NewGroup);
+
+        //    if (changedGroupEvent.Player.IsDead && !(changedGroupEvent.NewGroup.Equals("UserGroup")))
+        //    {
+        //        String message_to_use = new string('\n', 14) + $"<align=right><color=blue>NTF Tickets:</color> {Respawn.NtfTickets} </align>" +
+        //                $"\n<align=right><color=green>Chaos Tickets:</color> {Respawn.ChaosTickets} </align>";
+        //        changedGroupEvent.Player.ShowHint(message_to_use, 10000);
+        //    }
+        //}
+
+
+        /// <summary>
+        /// Class change to spectator should allow you to see NTF/Chaos tickets. 
+        /// </summary>
+        /// <param name="changedRoleEvent"></param>
+        internal void OnChanginRole(ChangingRoleEventArgs changedRoleEvent)
+        {
+            if (changedRoleEvent.NewRole is RoleType.Spectator)
+            {
+                String message_to_use = new string('\n', 14) + $"<align=right><color=blue>NTF Tickets:</color> {Respawn.NtfTickets} </align>" +
+                        $"\n<align=right><color=green>Chaos Tickets:</color> {Respawn.ChaosTickets} </align>";
+                changedRoleEvent.Player.ShowHint(message_to_use, 10000);
+            }
         }
 
 
@@ -77,6 +104,8 @@ namespace SpectatorTickets_EXILED3.Handlers
 
             }
         }
+
+
 
         /// <summary>
         /// Function purpose is to force hint clear on RoundEnd

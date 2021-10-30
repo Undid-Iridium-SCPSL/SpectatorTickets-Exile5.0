@@ -4,7 +4,7 @@ using System;
 using Player = Exiled.Events.Handlers.Player;
 using Server = Exiled.Events.Handlers.Server;
 
-namespace SpectatorTickets_EXILED3
+namespace SpectatorTickets3
 {
 
 
@@ -55,10 +55,18 @@ namespace SpectatorTickets_EXILED3
 
             Player.Died += currentSpectator.OnDeath;
             Player.Spawning += currentSpectator.OnRespawn;
-            Server.RestartingRound += currentSpectator.OnRoundRestart;
             Server.EndingRound += currentSpectator.OnRoundEnd;
+            Server.RestartingRound += currentSpectator.OnRoundRestart;
             Server.WaitingForPlayers += currentSpectator.OnRoundRestart;
             Server.RespawningTeam += currentSpectator.OnTeamSpawn;
+
+
+            Player.ChangingRole += currentSpectator.OnChanginRole;
+
+            //Player.ChangingGroup += currentSpectator.OnChangingGroup;
+
+            Log.Info("SpectratorTickets3 has been reloaded");
+
         }
         /// <summary>
         /// Unregisters the events defined in RegisterEvents, recommended that everything created be destroyed if not reused in some way.
@@ -74,6 +82,9 @@ namespace SpectatorTickets_EXILED3
             Server.RestartingRound -= currentSpectator.OnRoundRestart;
             Server.WaitingForPlayers -= currentSpectator.OnRoundRestart;
             Server.RespawningTeam -= currentSpectator.OnTeamSpawn;
+
+            Player.ChangingRole -= currentSpectator.OnChanginRole;
+            //Player.ChangingGroup -= currentSpectator.OnChangingGroup;
 
 
             currentSpectator = null;
