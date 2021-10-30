@@ -2,7 +2,7 @@
 SpectatorTickets-Exile3.0.
  Spectator tickets for Exile 3.0 for Chaos, and NTF.
  
- I would recommend picking up Ver 1.0.
+ I would recommend picking up Ver 1.1.
 
 
 ## Deposition
