@@ -30,7 +30,6 @@ namespace SpectatorTickets3.Handlers
                       $"\n<align=right><color=green>Chaos Tickets:</color> {Respawn.ChaosTickets} </align>";
                 current_player.ShowHint(message_to_use, 1.5F);
 
-
                 yield return new WaitForSeconds(.8F);
 
                 if ((current_player == null || current_player.Role != RoleType.Spectator) && current_player.IsAlive)

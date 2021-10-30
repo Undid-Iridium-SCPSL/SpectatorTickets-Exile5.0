@@ -87,14 +87,20 @@ namespace SpectatorTickets3
             // Make it dynamically updatable.
             // We do this by removing the listener for the event and then nulling the event handler.
             // This process must be repeated for each event.
-            PlayerEvents.Died -= currentSpectator.OnDeath;
-            PlayerEvents.Spawning -= currentSpectator.OnRespawn;
-            PlayerEvents.ChangingRole -= currentSpectator.OnChanginRole;
-            ServerEvents.EndingRound -= currentSpectator.OnRoundEnd;
-            ServerEvents.RestartingRound -= currentSpectator.OnRoundRestart;
-            ServerEvents.WaitingForPlayers -= currentSpectator.OnRoundRestart;
-            ServerEvents.RespawningTeam -= currentSpectator.OnTeamSpawn;
-
+            if (Config.ForceConstantUpdates)
+            {
+                PlayerEvents.ChangingRole -= eventHandler.OnRoleChange;
+            }
+            else
+            {
+                PlayerEvents.Died -= currentSpectator.OnDeath;
+                PlayerEvents.Spawning -= currentSpectator.OnRespawn;
+                PlayerEvents.ChangingRole -= currentSpectator.OnChanginRole;
+                ServerEvents.EndingRound -= currentSpectator.OnRoundEnd;
+                ServerEvents.RestartingRound -= currentSpectator.OnRoundRestart;
+                ServerEvents.WaitingForPlayers -= currentSpectator.OnRoundRestart;
+                ServerEvents.RespawningTeam -= currentSpectator.OnTeamSpawn;
+            }
             currentSpectator = null;
         }
     }
