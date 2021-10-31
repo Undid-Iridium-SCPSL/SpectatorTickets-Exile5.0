@@ -1,5 +1,4 @@
 ﻿using Exiled.API.Features;
-using Respawning;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -9,6 +8,7 @@ namespace SpectatorTickets3.Handlers
     class ForcedSpectatorMonitor : MonoBehaviour
     {
 
+        Config Config = new Config();
         private Player current_player;
 #pragma warning disable IDE0051 // Remove unused private members to be ignored
         /// <summary>
@@ -23,34 +23,31 @@ namespace SpectatorTickets3.Handlers
 
         /// <summary>
         /// Updates Ticket count every ~second so that information can be readily available to players. 
+        /// https://docs.unity3d.com/Packages/com.unity.ugui@1.0/manual/StyledText.html
+        /// 
+        /// Unfortunately, time_to_respawn, and Respawn can't tell me which team is supposed
+        /// to spawn next. So, no information that will be displayed. 
         /// </summary>
         /// <returns></returns>
         IEnumerator TicketCoroutine()
         {
 
-            int ntf_respawn_time = 0;
-            int chaos_respawn_time = 0;
             while (true)
             {
                 //Log.Info("What is the current player doing: " + current_player.ToString());
                 //Log.Info("What is the current role: " + current_player.Role + " versus : " + RoleType.Spectator);
 
-                int time_to_respawn = ((int)Math.Ceiling(Respawn.TimeUntilRespawn / 100.0)) * 100;
-                if (Respawn.NextKnownTeam is SpawnableTeamType.NineTailedFox)
-                {
 
-                    ntf_respawn_time = time_to_respawn;
-                    chaos_respawn_time = 0;
-                }
-                else
+
+                String message_to_use = new string('\n', 14) + $"<align=right><color=#1A5E63>NTF Tickets:</color> {Respawn.NtfTickets} </align>" +
+                      $"\n<align=right><color=green>Chaos Tickets:</color> {Respawn.ChaosTickets}  </align>";
+
+                if (Config.ShowTimeForRespawn)
                 {
-                    chaos_respawn_time = time_to_respawn;
-                    ntf_respawn_time = 0;
+                    int time_to_respawn = ((int)Math.Ceiling(Respawn.TimeUntilRespawn / 100.0)) * 100;
+                    message_to_use += $"\n<align=right><color=#247BA0>Estimated Respawn Time:</color> {time_to_respawn}  </align>";
                 }
 
-                String message_to_use = new string('\n', 14) + $"<align=right><color=blue>NTF Tickets:</color> {Respawn.NtfTickets} </align>" +
-                      $"\n<align=right><color=green>Chaos Tickets:</color> {Respawn.ChaosTickets}  </align>"
-                      + $"\n<align=right><color=#247BA0>Estimated Respawn Time:</color> time_to_respawn  </align>";
                 current_player.ShowHint(message_to_use, 1.5F);
 
                 yield return new WaitForSeconds(.8F);
@@ -62,6 +59,13 @@ namespace SpectatorTickets3.Handlers
                 }
             }
         }
-
+#pragma warning disable IDE0051 // Remove unused private members to be ignored
+        private void Destroy()
+        {
+            current_player.ShowHint("", 0);
+            StopCoroutine(TicketCoroutine());
+            Destroy(this);
+        }
+#pragma warning restore IDE0051 // Allow unused private members to not be ignored
     }
 }
