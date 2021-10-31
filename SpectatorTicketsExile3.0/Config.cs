@@ -9,6 +9,8 @@ namespace SpectatorTickets3
 
         public bool ForceConstantUpdates { get; set; } = false;
 
+        public bool ShowTimeForRespawn { get; set; } = false;
+
 
         [Description("Sets the message when someone joins the server. {Player} will be replaced with player name.")]
         public string JoinMessage { get; set; } = "{Player} - Why would you join?";
