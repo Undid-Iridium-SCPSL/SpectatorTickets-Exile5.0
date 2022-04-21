@@ -1,6 +1,8 @@
 ﻿using Exiled.API.Features;
+using MEC;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SpectatorTickets3.Handlers
@@ -17,7 +19,7 @@ namespace SpectatorTickets3.Handlers
         private void Awake()
         {
             current_player = Player.Get(gameObject);
-            StartCoroutine(TicketCoroutine());
+            Timing.RunCoroutine(TicketCoroutine());
         }
 #pragma warning restore IDE0051 // Allow unused private members to not be ignored
 
@@ -29,7 +31,7 @@ namespace SpectatorTickets3.Handlers
         /// to spawn next. So, no information that will be displayed. 
         /// </summary>
         /// <returns></returns>
-        IEnumerator TicketCoroutine()
+        IEnumerator<float> TicketCoroutine()
         {
 
             while (true)
@@ -50,7 +52,7 @@ namespace SpectatorTickets3.Handlers
 
                 current_player.ShowHint(message_to_use, 1.5F);
 
-                yield return new WaitForSeconds(.8F);
+                yield return Timing.WaitForSeconds(.8F);
 
                 if ((current_player == null || current_player.Role != RoleType.Spectator) && current_player.IsAlive)
                 {
