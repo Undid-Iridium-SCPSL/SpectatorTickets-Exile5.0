@@ -11,20 +11,26 @@ namespace SpectatorTickets3
 
     public class SpectatorTickets : Plugin<Config>
     {
-        private static readonly Lazy<SpectatorTickets> LazyInstance = new Lazy<SpectatorTickets>(() => new SpectatorTickets());
+
 
         /// <summary>
-        /// Quiet add SpectatorTickets to reduce performance hit
+        /// Gets a static instance of the <see cref="Plugin"/> class.
         /// </summary>
-        public static SpectatorTickets Instance => LazyInstance.Value;
+        public static SpectatorTickets Instance { get; private set; }
 
-        /// <summary>
-        /// Medium priority, lower prioritys mean faster loadin
-        /// </summary>
-        public override PluginPriority Priority { get; } = PluginPriority.Medium;
+        /// <inheritdoc />
+        public override string Author => "Undid-Iridium";
 
+        /// <inheritdoc />
+        public override string Name => "CleanupUtility";
 
-        private Handlers.SpectatorMonitor currentSpectator;
+        /// <inheritdoc />
+        public override Version RequiredExiledVersion { get; } = new Version(5, 1, 3);
+
+        /// <inheritdoc />
+        public override Version Version { get; } = new Version(1, 1, 0);
+
+        private Handlers.SpectatorMonitor currentSpectatorMonitor;
         private Handlers.ForcedEventHandlers eventHandler;
 
 
@@ -55,8 +61,8 @@ namespace SpectatorTickets3
             // Register the event handler class. And add the event,
             // to the EXILED_Events event listener so we get the event.
 
-
-            currentSpectator = new Handlers.SpectatorMonitor();
+            Instance = this;
+            currentSpectatorMonitor = new Handlers.SpectatorMonitor();
 
             if (Config.ForceConstantUpdates)
             {
@@ -65,14 +71,14 @@ namespace SpectatorTickets3
             }
             else
             {
-                PlayerEvents.Died += currentSpectator.OnDeath;
-                PlayerEvents.Spawning += currentSpectator.OnRespawn;
-                PlayerEvents.ChangingRole += currentSpectator.OnChanginRole;
+                PlayerEvents.Died += currentSpectatorMonitor.OnDeath;
+                PlayerEvents.Spawning += currentSpectatorMonitor.OnRespawn;
+                PlayerEvents.ChangingRole += currentSpectatorMonitor.OnChanginRole;
 
-                ServerEvents.EndingRound += currentSpectator.OnRoundEnd;
-                ServerEvents.RestartingRound += currentSpectator.OnRoundRestart;
-                ServerEvents.WaitingForPlayers += currentSpectator.OnRoundRestart;
-                ServerEvents.RespawningTeam += currentSpectator.OnTeamSpawn;
+                ServerEvents.EndingRound += currentSpectatorMonitor.OnRoundEnd;
+                ServerEvents.RestartingRound += currentSpectatorMonitor.OnRoundRestart;
+                ServerEvents.WaitingForPlayers += currentSpectatorMonitor.OnRoundRestart;
+                ServerEvents.RespawningTeam += currentSpectatorMonitor.OnTeamSpawn;
             }
 
 
@@ -89,19 +95,22 @@ namespace SpectatorTickets3
             // This process must be repeated for each event.
             if (Config.ForceConstantUpdates)
             {
+                eventHandler = null;
                 PlayerEvents.ChangingRole -= eventHandler.OnRoleChange;
             }
             else
             {
-                PlayerEvents.Died -= currentSpectator.OnDeath;
-                PlayerEvents.Spawning -= currentSpectator.OnRespawn;
-                PlayerEvents.ChangingRole -= currentSpectator.OnChanginRole;
-                ServerEvents.EndingRound -= currentSpectator.OnRoundEnd;
-                ServerEvents.RestartingRound -= currentSpectator.OnRoundRestart;
-                ServerEvents.WaitingForPlayers -= currentSpectator.OnRoundRestart;
-                ServerEvents.RespawningTeam -= currentSpectator.OnTeamSpawn;
+                PlayerEvents.Died -= currentSpectatorMonitor.OnDeath;
+                PlayerEvents.Spawning -= currentSpectatorMonitor.OnRespawn;
+                PlayerEvents.ChangingRole -= currentSpectatorMonitor.OnChanginRole;
+
+                ServerEvents.EndingRound -= currentSpectatorMonitor.OnRoundEnd;
+                ServerEvents.RestartingRound -= currentSpectatorMonitor.OnRoundRestart;
+                ServerEvents.WaitingForPlayers -= currentSpectatorMonitor.OnRoundRestart;
+                ServerEvents.RespawningTeam -= currentSpectatorMonitor.OnTeamSpawn;
             }
-            currentSpectator = null;
+            Instance = null;
+            currentSpectatorMonitor = null;
         }
     }
 }
